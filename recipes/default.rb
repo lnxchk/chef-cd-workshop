@@ -13,6 +13,8 @@ yum_repository 'epel' do
   gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
   action :create
 end
+packagecloud_repo 'chef/stable'
+package 'delivery-cli'
 
 package 'git' do
   action :install
