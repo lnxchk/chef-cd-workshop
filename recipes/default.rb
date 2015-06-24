@@ -7,12 +7,13 @@
 
 
 # add the EPEL repo so we can install Docker (docker-io)
-yum_repository 'epel' do
-  description 'Extra Packages for Enterprise Linux'
-  mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
-  gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
-  action :create
-end
+#yum_repository 'epel' do
+#  description 'Extra Packages for Enterprise Linux'
+#  mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
+#  gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
+#  action :create
+#end
+
 packagecloud_repo 'chef/stable'
 package 'delivery-cli'
 
@@ -32,13 +33,13 @@ gem_package 'kitchen-docker' do
 end
 
 # Install docker
-package 'docker-io' do
-  action :install
-end
+#package 'docker-io' do
+#  action :install
+#end
 
-service 'docker' do
-  action [:enable, :start]
-end
+#service 'docker' do
+#  action [:enable, :start]
+#end
 
 # Install jenkins
 include_recipe 'jenkins::java'
@@ -49,7 +50,7 @@ group 'docker' do
   append  true
   members 'jenkins'
   notifies :restart, 'service[jenkins]'
-  notifies :restart, 'service[docker]'  
+#  notifies :restart, 'service[docker]'  
 end
 
 # Add Jenkins plugins
@@ -118,3 +119,4 @@ ruby_block 'set the security_enabled flag' do
   end
   action :nothing
 end
+
